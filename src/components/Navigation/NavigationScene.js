@@ -3,9 +3,10 @@
 
 import React, { Component, PropTypes } from 'react';
 import {
-  View,
-  StyleSheet,
   NavigationExperimental,
+  Platform,
+  StyleSheet,
+  View,
 } from 'react-native';
 import type { Route } from './NavigationTypeDefinitions';
 
@@ -88,7 +89,7 @@ export default class Scene extends Component<void, Props, void> {
         }
         panHandlers={routeDesc.type === 'modal' ?
           NavigationCard.CardStackPanResponder.forVertical(this.props) :
-          undefined
+          Platform.OS === 'ios' ? undefined : null
         }
         renderScene={this._renderScene}
         onNavigateBack={this.props.onNavigateBack}
